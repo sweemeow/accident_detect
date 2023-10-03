@@ -1,7 +1,7 @@
 import cv2
 from detection import AccidentDetectionModel
 import numpy as np
-import osg
+import os
 
 model = AccidentDetectionModel("model.json", 'model_weights.h5')
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -23,11 +23,11 @@ def startapplication():
         roi = cv2.resize(gray_frame, (250, 250))
 
         pred, prob = model.predict_accident(roi[np.newaxis, :, :])
-        if(pred == "Accident"):
+        if (pred == "Accident"):
             prob = (round(prob[0][0]*100, 2))
 
             # to beep when alert:
-            if(prob > 90):
+            if (prob > 90):
                 print("accident")
 
             cv2.rectangle(frame, (0, 0), (280, 40), (0, 0, 0), -1)

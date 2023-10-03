@@ -1,4 +1,4 @@
-# Accident Detection System
+# AccidentEye : Intelligent Visual Accident Detection System
 
 **Last Updated: *7 June 2022***
 
