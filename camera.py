@@ -2,6 +2,9 @@ import cv2
 from detection import AccidentDetectionModel
 import numpy as np
 import os
+import winsound
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 model = AccidentDetectionModel("model.json", 'model_weights.h5')
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -27,8 +30,13 @@ def startapplication():
             prob = (round(prob[0][0]*100, 2))
 
             # to beep when alert:
-            if (prob > 90):
+            if (prob > 97):
                 print("accident")
+                frequency = 2500 
+                duration = 1000  # Set Duration To 1000 ms == 1 second
+                winsound.Beep(frequency, duration)
+            else: 
+                print("not accident")
 
             cv2.rectangle(frame, (0, 0), (280, 40), (0, 0, 0), -1)
             cv2.putText(frame, pred+" "+str(prob),
